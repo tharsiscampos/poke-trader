@@ -1,7 +1,8 @@
-package tharsiscampos.poketrader;
+package tharsiscampos.poketrader.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -12,12 +13,15 @@ import me.sargunvohra.lib.pokekotlin.client.PokeApi;
 import me.sargunvohra.lib.pokekotlin.model.NamedApiResource;
 import me.sargunvohra.lib.pokekotlin.model.NamedApiResourceList;
 import me.sargunvohra.lib.pokekotlin.model.Pokemon;
+import tharsiscampos.poketrader.entity.Poke;
+import tharsiscampos.poketrader.repo.PokeREPO;
 
 @Service
-public class PokeService {
+public class PokeSRV {
 	
 	@Autowired ApplicationContext ac;
 	@Autowired PokeApi pokeApi;
+	@Autowired PokeREPO pokeREPO;
 
 	public static class ListagemPokesTO {
 		public List<ListagemPokeTO> listaListagemPokeTO;
@@ -60,14 +64,37 @@ public class PokeService {
 		public Integer baseExperience;
 	}
 
-	@Cacheable("poke-detalhes")
-	public DetalhesPokeTO recuperar(Integer id) {
-		Pokemon p = pokeApi.getPokemon(id);
+	public DetalhesPokeTO recuperarDetalhes(Integer id) {
+		
+		Poke poke = recuperar(id);
+		
 		DetalhesPokeTO to = new DetalhesPokeTO();
-		to.id = p.getId();
-		to.nome = p.getName();
-		to.baseExperience = p.getBaseExperience();
+		to.id = poke.getId();
+		to.nome = poke.getNome();
+		to.baseExperience = poke.getBaseExperience();
+		
 		return to;
 	}
 	
+	public Poke recuperar(Integer id) {
+		Optional<Poke> opPoke = pokeREPO.findById(id);
+		Poke poke = null;
+		
+		if (opPoke.isEmpty()) {
+			Pokemon p = pokeApi.getPokemon(id);
+			
+			poke = new Poke();
+			poke.setId(id);
+			poke.setNome(p.getName());
+			poke.setBaseExperience(p.getBaseExperience());
+			
+			pokeREPO.save(poke);
+			
+		} else {
+			poke = opPoke.get();
+		}
+		
+		return poke;
+	}
+
 }

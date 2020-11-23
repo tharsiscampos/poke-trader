@@ -1,4 +1,4 @@
-package tharsiscampos.poketrader;
+package tharsiscampos.poketrader.ctr;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -7,14 +7,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import tharsiscampos.poketrader.PokeService.DetalhesPokeTO;
-import tharsiscampos.poketrader.PokeService.ListagemPokesTO;
+import tharsiscampos.poketrader.service.PokeSRV;
+import tharsiscampos.poketrader.service.PokeSRV.DetalhesPokeTO;
+import tharsiscampos.poketrader.service.PokeSRV.ListagemPokesTO;
 
 @RestController
-public class PTRestController {
+public class PokesCTR {
 	
 	@Autowired ApplicationContext ac;
-	@Autowired PokeService pokeService;
+	@Autowired PokeSRV pokeService;
 
 	@GetMapping("/pokes")
 	public ListagemPokesTO listar(@RequestParam Integer numPagina) {
@@ -23,6 +24,6 @@ public class PTRestController {
 
 	@GetMapping("/pokes/{id}")
 	public DetalhesPokeTO recuperar(@PathVariable("id") Integer id) {
-		return pokeService.recuperar(id);
+		return pokeService.recuperarDetalhes(id);
 	}
 }

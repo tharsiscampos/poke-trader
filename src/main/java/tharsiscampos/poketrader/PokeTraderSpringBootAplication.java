@@ -13,15 +13,15 @@ import me.sargunvohra.lib.pokekotlin.client.PokeApiClient;
 
 @SpringBootApplication
 @EnableCaching
-public class PTSpringBootAplication {
+public class PokeTraderSpringBootAplication {
 	public static void main(String[] args) throws Throwable {
-		SpringApplication.run(PTSpringBootAplication.class, args);
+		SpringApplication.run(PokeTraderSpringBootAplication.class, args);
 	}
 
 	@Bean @Primary public ObjectMapper objectMapper() {
         return UtilJson.OBJECT_MAPPER;
     }
-
+	
 	@Bean @Primary public PokeApi pokeApi() {
         return new PokeApiClient();
     }
