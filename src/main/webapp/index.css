@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+* {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+body {
+	margin: 70px 30px 30px 30px;
+}
+
+nav {
+	background-color: #ef5350;
+}
+
+.card {
+}
+
+.card .card-text {
+	margin-bottom: 20px;
+}

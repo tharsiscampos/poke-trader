@@ -1,29 +1,28 @@
 package tharsiscampos.poketrader;
 
-import java.util.Arrays;
-import java.util.List;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import tharsiscampos.poketrader.PokeService.DetalhesPokeTO;
+import tharsiscampos.poketrader.PokeService.ListagemPokesTO;
 
 @RestController
 public class PTRestController {
-
-	public static class ListagemPokesTO {
-		public Integer id;
-		public String nome;
-	}
 	
+	@Autowired ApplicationContext ac;
+	@Autowired PokeService pokeService;
+
 	@GetMapping("/pokes")
-	public List<ListagemPokesTO> listar() {
-		ListagemPokesTO to1 = new ListagemPokesTO();
-		to1.id = 1;
-		to1.nome= "teste1";
-		
-		ListagemPokesTO to2 = new ListagemPokesTO();
-		to2.id = 2;
-		to2.nome= "teste2";
-		
-		return Arrays.asList(to1, to2);
+	public ListagemPokesTO listar(@RequestParam Integer numPagina) {
+		return pokeService.listar(numPagina);
+	}
+
+	@GetMapping("/pokes/{id}")
+	public DetalhesPokeTO recuperar(@PathVariable("id") Integer id) {
+		return pokeService.recuperar(id);
 	}
 }

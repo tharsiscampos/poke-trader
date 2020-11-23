@@ -1,6 +1,5 @@
 Manifest-Version: 1.0
-Build-Jdk-Spec: 15
-Implementation-Title: Poke Trader
-Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: tharsis
+Build-Jdk: 15
 Created-By: Maven Integration for Eclipse
 
