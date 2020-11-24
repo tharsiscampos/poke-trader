@@ -12,3 +12,4 @@ Foram escritas classes de teste para simplicar a construção da aplicação, ma
 
 São duas pessoas envolvidas nas trocas, o player A (Aldanice) e B (Bernardino). A análise se uma troca é justa ou não foi baseada na diferença da base_experience. Se essa diferença for maior ou igual a base_experience de um dos pokemons da troca, julguei não ser justa pois a diferença passa a ficar desproporcional aos valores dos pokemons envolvidos. Difícil saber se o critério é adequado, mas me pareceu "bom", pelo menos.
 
+Para visualizar como ficou, o deploy está em https://tharsis-poke-trader.herokuapp.com/
