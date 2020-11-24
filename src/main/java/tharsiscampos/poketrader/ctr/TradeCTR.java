@@ -27,6 +27,12 @@ public class TradeCTR {
 
 	@PostMapping("/trade/realizar")
 	public void realizar(@RequestBody DadosParaAnaliseTrocaTO to) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		tradeSRV.realizarTroca(to);
 	}
 

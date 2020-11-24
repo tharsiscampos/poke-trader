@@ -23,9 +23,11 @@ $(document).ready(function() {
 	
 });
 
-class PokeTraderVH {
+class PokeTraderVH extends VH {
 	
 	constructor(cfgs) {
+		
+		super();
 		
 		this.cfgs = cfgs;
 		this.$situacao = $(cfgs.seletorSituacao);
@@ -73,7 +75,9 @@ class PokeTraderVH {
 	
 	atualizarSituacaoDaTroca() {
 		
-		this.$situacao.removeClass("alert-primary alert-success alert-danger");
+		this.$situacao.removeClass("alert-primary alert-success alert-danger")
+				.addClass("alert-primary")
+				.html(this.getDivAguardando());
 		
 		var numA = this.playerVHA.getNumPokemonsNaTroca();
 		var numB = this.playerVHB.getNumPokemonsNaTroca();
@@ -103,6 +107,7 @@ class PokeTraderVH {
 			Backend.getInstancia().analisarTroca(dadosParaAnaliseTrocaTO).done(function(analiseTrocaTO) {
 		
 				var $button = $("<button class='btn btn-sm btn-primary float-right'>").on("click", function() {
+					$(this).html(thisVH.getDivAguardando());
 					thisVH.realizarTroca(dadosParaAnaliseTrocaTO);
 				});
 				

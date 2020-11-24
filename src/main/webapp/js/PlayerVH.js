@@ -1,7 +1,9 @@
 
-class PlayerVH {
+class PlayerVH extends VH {
 	
 	constructor(cfgs) {
+		
+		super();
 		
 		this.listagemPessoaTO = cfgs.listagemPessoaTO;
 		this.$player = $(cfgs.seletor);

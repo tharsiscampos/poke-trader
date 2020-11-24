@@ -1,7 +1,9 @@
 
-class BuscaVH {
+class BuscaVH extends VH {
 	
 	constructor(idModal) {
+		
+		super();
 		
 		this.numPagina = 1;
 		this.$playerCard = null;
@@ -19,7 +21,7 @@ class BuscaVH {
 
 		this.onSelecaoFinalizada = onSelecaoFinalizada;
 		this.$modal.find(".modal-title span").text(nomePlayer);
-		this.$divBusca.html("<div class='spinner-border spinner-border-sm' role='status'><span class='sr-only'>Carregando...</span></div>");
+		this.$divBusca.html(this.getDivAguardando());
 		this.$pokesSelecionados.html("");
 		this.$modal.modal();
 		var thisVH = this;

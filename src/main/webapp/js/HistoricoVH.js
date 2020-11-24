@@ -1,14 +1,25 @@
 
-class HistoricoVH {
+class HistoricoVH extends VH {
 	
 	constructor(cfgs) {
+		
+		super();
+		
 		this.$accordion = $(cfgs.seletorHistorico);
 		this.idAtualCard = 0;
 	}
 	
 	exibirHistorico() {
+
+		this.$accordion.html(this.getDivAguardando());
+		this.$accordion.show();
+		
 		var thisVH = this;
+		
 		Backend.getInstancia().listarTrocas().done(function(listaListagemTrocaTO) {
+			
+			thisVH.$accordion.html("");
+			
 			$.each(listaListagemTrocaTO, function(indice, listagemTrocaTO) {
 				var idCard = "card_" + thisVH.idAtualCard++;
 				var detalhes = [];
@@ -32,7 +43,7 @@ class HistoricoVH {
 				);
 				thisVH.$accordion.append($card);
 			});
-			thisVH.$accordion.show();
+			
 			setTimeout(function() {
 				thisVH.$accordion.find(".card:first .card-header button").trigger("click");
 			}, 500);
