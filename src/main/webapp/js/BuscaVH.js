@@ -25,7 +25,7 @@ class BuscaVH extends VH {
 		this.$pokesSelecionados.html("");
 		this.$modal.modal();
 		var thisVH = this;
-		
+
 		Backend.getInstancia().buscarPokes(this.numPagina).done(function(listagemPokesTO) {
 			this.numPagina = listagemPokesTO.numPagina;
 			thisVH.$divBusca.html("");
